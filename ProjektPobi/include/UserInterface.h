@@ -14,6 +14,9 @@ private:
 public:
     UserInterface(Garage& garage, Parking& parking);
 
+    // scizka zapisu
+    const std::string BASE_PATH = "src/";
+
     void showMenu();
     void addVehicle();
     void listVehicles() const;
