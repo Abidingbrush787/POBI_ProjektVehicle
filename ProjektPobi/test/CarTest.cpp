@@ -5,7 +5,7 @@
 #include <boost/date_time/gregorian/gregorian.hpp>
 
 BOOST_AUTO_TEST_CASE(CarCreationTest) {
-    boost::gregorian::date expiry_date(2025, 12, 31);
+    grDate expiry_date(2025, 12, 31);
     auto strategy = std::make_shared<CarInspectionStrategy>();
     Car* car = new Car("ABC123", 2020, 4, 85, 90, 80, expiry_date, strategy);
 
