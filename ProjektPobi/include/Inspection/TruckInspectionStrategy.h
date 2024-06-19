@@ -5,6 +5,7 @@
 #include "InspectionException.h"
 #include "Truck.h"
 
+// Strategia inspekcji dla ciężarówek
 class TruckInspectionStrategy : public InspectionStrategy {
 public:
     void inspect(const Vehicle& vehicle) const override {

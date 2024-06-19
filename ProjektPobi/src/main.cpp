@@ -3,7 +3,7 @@
 #include "UserInterface.h"
 
 int main() {
-    Garage garage(10);
+    Garage garage(100);
     Parking parking(100);
 
     UserInterface ui(garage, parking);

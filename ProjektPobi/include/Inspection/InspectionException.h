@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <string>
 
+// Wyjątek rzucany podczas inspekcji
 class InspectionException : public std::runtime_error {
 public:
     explicit InspectionException(const std::string& message)
