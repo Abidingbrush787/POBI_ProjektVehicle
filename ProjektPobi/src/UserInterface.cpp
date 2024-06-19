@@ -7,9 +7,35 @@
 #include "Inspection/MotorcycleInspectionStrategy.h"
 #include "Containers/GarageFullException.h"
 #include "Inspection/LoaderException.h"
-#include "Manager.h" // Dodaj ten include
+#include "Manager.h"
+#include "Containers/Month_controler.h"
 #include <fstream>
 #include <iostream>
+
+// Funkcja do konwersji daty do formatu `YYYY-MMM-DD`
+std::string dateToString(const boost::gregorian::date& date) {
+    int year = date.year();
+    int month = date.month();
+    int day = date.day();
+    std::stringstream ss;
+    ss << year << "-" << monthToString(month) << "-" << day;
+    return ss.str();
+}
+
+// Funkcja do konwersji daty z formatu `YYYY-MMM-DD`
+boost::gregorian::date stringToDate(const std::string& dateStr) {
+    std::stringstream ss(dateStr);
+    std::string yearStr, monthStr, dayStr;
+    std::getline(ss, yearStr, '-');
+    std::getline(ss, monthStr, '-');
+    std::getline(ss, dayStr);
+
+    int year = std::stoi(yearStr);
+    int month = stringToMonth(monthStr);
+    int day = std::stoi(dayStr);
+
+    return boost::gregorian::date(year, month, day);
+}
 
 UserInterface::UserInterface(Garage& garage, Parking& parking) : garage(garage), parking(parking) {}
 
@@ -128,14 +154,33 @@ void UserInterface::saveState(const std::string& filename) const {
     if (file.is_open()) {
         const auto& vehicles = garage.getItems();
         for (const auto& vehicle : vehicles) {
+            if (dynamic_cast<Car*>(vehicle.get())) {
+                file << "Car ";
+            } else if (dynamic_cast<Truck*>(vehicle.get())) {
+                file << "Truck ";
+            } else if (dynamic_cast<Motorcycle*>(vehicle.get())) {
+                file << "Motorcycle ";
+            }
+
             file << vehicle->getRegistrationNumber() << " "
                  << vehicle->getYearOfProduction() << " "
                  << vehicle->getBrakeCondition() << " "
                  << vehicle->getTireCondition() << " "
-                 << boost::gregorian::to_simple_string(vehicle->getInspectionExpiryDate()) << "\n";
+                 << dateToString(vehicle->getInspectionExpiryDate());
+
+            if (auto car = dynamic_cast<Car*>(vehicle.get())) {
+                file << " " << car->getGarageSpace() << " " << car->getEngineCondition();
+            } else if (auto truck = dynamic_cast<Truck*>(vehicle.get())) {
+                file << " " << truck->getCargoCondition();
+            } else if (auto motorcycle = dynamic_cast<Motorcycle*>(vehicle.get())) {
+                file << " " << motorcycle->getFrameCondition();
+            }
+
+            file << "\n";
         }
         file.close();
         std::cout << "State saved to " << filename << ".\n";
+        std::cout << "File saved at: " << filename << std::endl;
     } else {
         std::cerr << "Unable to open file for saving.\n";
     }
@@ -145,19 +190,52 @@ void UserInterface::loadState(const std::string& filename) {
     std::ifstream file(filename);
     if (file.is_open()) {
         garage.clear();
-        std::string reg_num;
+        std::string reg_num, type;
         int year;
-        double brake_cond, tire_cond, extra_cond;
+        double brake_cond, tire_cond, extra_cond1, extra_cond2;
         std::string date_str;
-        boost::gregorian::date expiry_date;
+        grDate expiry_date;
 
-        while (file >> reg_num >> year >> brake_cond >> tire_cond >> date_str) {
-            expiry_date = boost::gregorian::from_simple_string(date_str);
-            // Here you should also read specific vehicle data like doors for cars, cargo condition for trucks, etc.
-            // For simplicity, we'll assume all loaded vehicles are cars.
-            auto strategy = std::make_shared<CarInspectionStrategy>();
-            auto vehicle = std::make_shared<Car>(reg_num, year, 4, brake_cond, tire_cond, 80, expiry_date, strategy); // Assuming default values for the remaining parameters
-            garage.addItem(vehicle);
+        while (file >> type >> reg_num >> year >> brake_cond >> tire_cond >> date_str) {
+            try {
+                expiry_date = stringToDate(date_str);
+            } catch (const std::exception& e) {
+                std::cerr << "Invalid date format for vehicle " << reg_num << ": " << date_str << std::endl;
+                continue;
+            }
+
+            if (type == "Car") {
+                int doors;
+                double engine_cond;
+                if (!(file >> doors >> engine_cond)) {
+                    std::cerr << "Invalid data for Car " << reg_num << std::endl;
+                    continue;
+                }
+                auto strategy = std::make_shared<CarInspectionStrategy>();
+                auto vehicle = std::make_shared<Car>(reg_num, year, doors, brake_cond, tire_cond, engine_cond, expiry_date, strategy);
+                garage.addItem(vehicle);
+            } else if (type == "Truck") {
+                double cargo_cond;
+                if (!(file >> cargo_cond)) {
+                    std::cerr << "Invalid data for Truck " << reg_num << std::endl;
+                    continue;
+                }
+                auto strategy = std::make_shared<TruckInspectionStrategy>();
+                auto vehicle = std::make_shared<Truck>(reg_num, year, 15.5, brake_cond, tire_cond, cargo_cond, expiry_date, strategy); // Assuming default value for capacity
+                garage.addItem(vehicle);
+            } else if (type == "Motorcycle") {
+                double frame_cond;
+                if (!(file >> frame_cond)) {
+                    std::cerr << "Invalid data for Motorcycle " << reg_num << std::endl;
+                    continue;
+                }
+                auto strategy = std::make_shared<MotorcycleInspectionStrategy>();
+                auto vehicle = std::make_shared<Motorcycle>(reg_num, year, 1, brake_cond, tire_cond, frame_cond, expiry_date, strategy); // Assuming default value for capacity
+                garage.addItem(vehicle);
+            } else {
+                std::cerr << "Unknown vehicle type in file for " << reg_num << std::endl;
+                continue;
+            }
         }
         file.close();
         std::cout << "State loaded from " << filename << ".\n";

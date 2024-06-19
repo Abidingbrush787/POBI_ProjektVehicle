@@ -6,6 +6,7 @@
 #include <memory>
 #include <boost/date_time/gregorian/gregorian.hpp>
 
+using grDate = boost::gregorian::date;
 // Klasa abstrakcyjna reprezentująca pojazd
 class InspectionStrategy;
 
@@ -15,10 +16,10 @@ protected:
     int year_of_production; // Rok produkcji pojazdu
     double brake_condition; // Stan hamulców (0-100)
     double tire_condition; // Stan opon (0-100)
-    boost::gregorian::date inspection_expiry_date; // Data ważności przeglądu
+    grDate inspection_expiry_date; // Data ważności przeglądu
 
 public:
-    Vehicle(const std::string& reg_num, int year, double brake_cond, double tire_cond, const boost::gregorian::date& expiry_date);
+    Vehicle(const std::string& reg_num, int year, double brake_cond, double tire_cond, const grDate& expiry_date);
     virtual ~Vehicle() = default;
 
     // Metody dostępowe (gettery)
@@ -26,7 +27,7 @@ public:
     int getYearOfProduction() const;
     double getBrakeCondition() const;
     double getTireCondition() const;
-    boost::gregorian::date getInspectionExpiryDate() const;
+    grDate getInspectionExpiryDate() const;
 
     // Metody wirtualne do zaimplementowania w klasach pochodnych
     virtual void performInspection() const = 0;

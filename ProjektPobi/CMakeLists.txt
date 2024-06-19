@@ -20,7 +20,9 @@ set(SOURCE_FILES
         src/Motorcycle.cpp
         src/Manager.cpp
         src/Inspection/InspectionException.cpp
-        src/UserInterface.cpp)
+        src/UserInterface.cpp
+        src/Month_controler.cpp
+        include/Containers/Month_controler.h)
 
 add_executable(Project ${SOURCE_FILES})
 
