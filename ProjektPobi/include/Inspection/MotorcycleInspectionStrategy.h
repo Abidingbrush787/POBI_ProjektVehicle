@@ -5,6 +5,7 @@
 #include "InspectionException.h"
 #include "Motorcycle.h"
 
+// Strategia inspekcji dla motocykli
 class MotorcycleInspectionStrategy : public InspectionStrategy {
 public:
     void inspect(const Vehicle& vehicle) const override {

@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <string>
 
+// Wyjątek rzucany podczas błędu ładowania pliku
 class FileLoadException : public std::runtime_error {
 public:
     explicit FileLoadException(const std::string& message)

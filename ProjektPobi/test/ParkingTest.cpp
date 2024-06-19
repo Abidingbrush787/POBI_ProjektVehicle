@@ -1,6 +1,6 @@
-#define BOOST_TEST_MODULE GarageTest
+#define BOOST_TEST_MODULE ParkingTest
 #include <boost/test/included/unit_test.hpp>
-#include "Containers/Garage.h"
+#include "Containers/Parking.h"
 #include "Car.h"
 #include "Truck.h"
 #include "Motorcycle.h"
@@ -10,7 +10,7 @@
 #include <boost/date_time/gregorian/gregorian.hpp>
 
 BOOST_AUTO_TEST_CASE(AddAndRemoveVehicle) {
-    Garage garage(10);
+    Parking parking(100);
     boost::gregorian::date expiry_date(2025, 6, 15);
     auto car_strategy = std::make_shared<CarInspectionStrategy>();
     auto truck_strategy = std::make_shared<TruckInspectionStrategy>();
@@ -20,16 +20,16 @@ BOOST_AUTO_TEST_CASE(AddAndRemoveVehicle) {
     auto truck = std::make_shared<Truck>("DEF456", 2022, 20.0, 80.0, 85.0, 90.0, expiry_date, truck_strategy);
     auto motorcycle = std::make_shared<Motorcycle>("GHI789", 2022, 600, 80.0, 85.0, 90.0, expiry_date, motorcycle_strategy);
 
-    BOOST_CHECK(garage.addItem(car));
-    BOOST_CHECK(garage.addItem(truck));
-    BOOST_CHECK(garage.addItem(motorcycle));
+    BOOST_CHECK(parking.addItem(car));
+    BOOST_CHECK(parking.addItem(truck));
+    BOOST_CHECK(parking.addItem(motorcycle));
 
-    BOOST_CHECK_EQUAL(garage.getItems().size(), 3);
+    BOOST_CHECK_EQUAL(parking.getItems().size(), 3);
 
-    garage.removeItem(car);
-    BOOST_CHECK_EQUAL(garage.getItems().size(), 2);
+    parking.removeItem(car);
+    BOOST_CHECK_EQUAL(parking.getItems().size(), 2);
 
-    garage.removeItem(truck);
-    garage.removeItem(motorcycle);
-    BOOST_CHECK_EQUAL(garage.getItems().size(), 0);
+    parking.removeItem(truck);
+    parking.removeItem(motorcycle);
+    BOOST_CHECK_EQUAL(parking.getItems().size(), 0);
 }

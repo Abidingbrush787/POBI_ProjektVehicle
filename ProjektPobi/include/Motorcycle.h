@@ -8,17 +8,21 @@ class InspectionStrategy;
 
 class Motorcycle : public Vehicle {
 private:
-    double frame_condition; // Wskaźnik stanu ramy (0-100)
-    std::shared_ptr<InspectionStrategy> inspection_strategy;
+    double frame_condition; // Stan ramy (0-100)
+    std::shared_ptr<InspectionStrategy> inspection_strategy; // Strategia inspekcji
 
 public:
     Motorcycle(const std::string& reg_num, int year, int capacity, double brake_cond, double tire_cond, double frame_cond, const boost::gregorian::date& expiry_date, std::shared_ptr<InspectionStrategy> strategy);
+
+    // Implementacja metod wirtualnych
     void performInspection() const override;
     int getGarageSpace() const override;
 
-    friend std::ostream& operator<<(std::ostream& os, const Motorcycle& motorcycle);
-
+    // Getter stanu ramy
     double getFrameCondition() const;
+
+    // Operator wyjścia
+    friend std::ostream& operator<<(std::ostream& os, const Motorcycle& motorcycle);
 };
 
 #endif // MOTORCYCLE_H

@@ -1,6 +1,7 @@
 #ifndef INSPECTIONSTRATEGY_H
 #define INSPECTIONSTRATEGY_H
 
+// Klasa abstrakcyjna dla strategii inspekcji
 class Vehicle;
 
 class InspectionStrategy {
