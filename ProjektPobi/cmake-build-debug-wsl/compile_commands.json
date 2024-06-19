@@ -1,0 +1,42 @@
+[
+{
+  "directory": "/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/cmake-build-debug-wsl",
+  "command": "/usr/bin/g++ -DBOOST_ALL_NO_LIB -DBOOST_DATE_TIME_DYN_LINK -DBOOST_UNIT_TEST_FRAMEWORK_DYN_LINK -I/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/include -g -fdiagnostics-color=always -std=gnu++17 -o CMakeFiles/Project.dir/src/main.cpp.o -c /home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/src/main.cpp",
+  "file": "/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/src/main.cpp"
+},
+{
+  "directory": "/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/cmake-build-debug-wsl",
+  "command": "/usr/bin/g++ -DBOOST_ALL_NO_LIB -DBOOST_DATE_TIME_DYN_LINK -DBOOST_UNIT_TEST_FRAMEWORK_DYN_LINK -I/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/include -g -fdiagnostics-color=always -std=gnu++17 -o CMakeFiles/Project.dir/src/Vehicle.cpp.o -c /home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/src/Vehicle.cpp",
+  "file": "/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/src/Vehicle.cpp"
+},
+{
+  "directory": "/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/cmake-build-debug-wsl",
+  "command": "/usr/bin/g++ -DBOOST_ALL_NO_LIB -DBOOST_DATE_TIME_DYN_LINK -DBOOST_UNIT_TEST_FRAMEWORK_DYN_LINK -I/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/include -g -fdiagnostics-color=always -std=gnu++17 -o CMakeFiles/Project.dir/src/Car.cpp.o -c /home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/src/Car.cpp",
+  "file": "/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/src/Car.cpp"
+},
+{
+  "directory": "/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/cmake-build-debug-wsl",
+  "command": "/usr/bin/g++ -DBOOST_ALL_NO_LIB -DBOOST_DATE_TIME_DYN_LINK -DBOOST_UNIT_TEST_FRAMEWORK_DYN_LINK -I/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/include -g -fdiagnostics-color=always -std=gnu++17 -o CMakeFiles/Project.dir/src/Truck.cpp.o -c /home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/src/Truck.cpp",
+  "file": "/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/src/Truck.cpp"
+},
+{
+  "directory": "/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/cmake-build-debug-wsl",
+  "command": "/usr/bin/g++ -DBOOST_ALL_NO_LIB -DBOOST_DATE_TIME_DYN_LINK -DBOOST_UNIT_TEST_FRAMEWORK_DYN_LINK -I/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/include -g -fdiagnostics-color=always -std=gnu++17 -o CMakeFiles/Project.dir/src/Motorcycle.cpp.o -c /home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/src/Motorcycle.cpp",
+  "file": "/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/src/Motorcycle.cpp"
+},
+{
+  "directory": "/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/cmake-build-debug-wsl",
+  "command": "/usr/bin/g++ -DBOOST_ALL_NO_LIB -DBOOST_DATE_TIME_DYN_LINK -DBOOST_UNIT_TEST_FRAMEWORK_DYN_LINK -I/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/include -g -fdiagnostics-color=always -std=gnu++17 -o CMakeFiles/Project.dir/src/Manager.cpp.o -c /home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/src/Manager.cpp",
+  "file": "/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/src/Manager.cpp"
+},
+{
+  "directory": "/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/cmake-build-debug-wsl",
+  "command": "/usr/bin/g++ -DBOOST_ALL_NO_LIB -DBOOST_DATE_TIME_DYN_LINK -DBOOST_UNIT_TEST_FRAMEWORK_DYN_LINK -I/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/include -g -fdiagnostics-color=always -std=gnu++17 -o CMakeFiles/Project.dir/src/UserInterface.cpp.o -c /home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/src/UserInterface.cpp",
+  "file": "/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/src/UserInterface.cpp"
+},
+{
+  "directory": "/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/cmake-build-debug-wsl",
+  "command": "/usr/bin/g++ -DBOOST_ALL_NO_LIB -DBOOST_DATE_TIME_DYN_LINK -DBOOST_UNIT_TEST_FRAMEWORK_DYN_LINK -I/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/include -g -fdiagnostics-color=always -std=gnu++17 -o CMakeFiles/Project.dir/src/Inspection/InspectionException.cpp.o -c /home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/src/Inspection/InspectionException.cpp",
+  "file": "/home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/src/Inspection/InspectionException.cpp"
+}
+]

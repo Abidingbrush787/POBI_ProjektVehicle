@@ -1,0 +1,4 @@
+C:\WINDOWS\system32\wsl.exe --distribution Debian --exec "/mnt/c/Program Files/JetBrains/CLion 2024.1.3/bin/ttyfix" /bin/bash -c "export CLION_IDE=TRUE && export CMAKE_COLOR_DIAGNOSTICS=ON && export JETBRAINS_IDE=TRUE && cd /home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/cmake-build-debug-wsl && /usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G 'CodeBlocks - Unix Makefiles' -S /home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi -B /home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/cmake-build-debug-wsl"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/aleks/POBI/POBI_ProjektVehicle/ProjektPobi/cmake-build-debug-wsl

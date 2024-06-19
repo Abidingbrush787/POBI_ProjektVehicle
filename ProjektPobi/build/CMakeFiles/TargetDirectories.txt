@@ -1,0 +1,3 @@
+/home/aleks/POBI/ProjektPobi/build/CMakeFiles/Project.dir
+/home/aleks/POBI/ProjektPobi/build/CMakeFiles/edit_cache.dir
+/home/aleks/POBI/ProjektPobi/build/CMakeFiles/rebuild_cache.dir
