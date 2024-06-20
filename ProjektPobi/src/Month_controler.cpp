@@ -1,7 +1,3 @@
-//
-// Created by Aleksander on 20.06.2024.
-//
-
 #include "../include/Containers/Month_controler.h"
 
 std::string monthToString(int month) {
@@ -23,17 +19,17 @@ std::string monthToString(int month) {
 }
 
 int stringToMonth(const std::string& month) {
-    if (month == "Jan") return 1;
-    if (month == "Feb") return 2;
-    if (month == "Mar") return 3;
-    if (month == "Apr") return 4;
+    if (month == "Jan" || month == "January") return 1;
+    if (month == "Feb" || month == "February") return 2;
+    if (month == "Mar" || month == "March") return 3;
+    if (month == "Apr" || month == "April") return 4;
     if (month == "May") return 5;
-    if (month == "Jun") return 6;
-    if (month == "Jul") return 7;
-    if (month == "Aug") return 8;
-    if (month == "Sep") return 9;
-    if (month == "Oct") return 10;
-    if (month == "Nov") return 11;
-    if (month == "Dec") return 12;
+    if (month == "Jun" || month == "June") return 6;
+    if (month == "Jul" || month == "July") return 7;
+    if (month == "Aug" || month == "August") return 8;
+    if (month == "Sep" || month == "September") return 9;
+    if (month == "Oct" || month == "October") return 10;
+    if (month == "Nov" || month == "November") return 11;
+    if (month == "Dec" || month == "December") return 12;
     return -1; // Invalid month
 }

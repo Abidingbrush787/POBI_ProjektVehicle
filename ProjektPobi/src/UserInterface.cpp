@@ -11,8 +11,10 @@
 #include "Containers/Month_controler.h"
 #include <fstream>
 #include <iostream>
+#include <filesystem>
 
-// Funkcja do konwersji daty do formatu `YYYY-MMM-DD`
+namespace fs = std::filesystem;
+
 std::string dateToString(const boost::gregorian::date& date) {
     int year = date.year();
     int month = date.month();
@@ -22,7 +24,6 @@ std::string dateToString(const boost::gregorian::date& date) {
     return ss.str();
 }
 
-// Funkcja do konwersji daty z formatu `YYYY-MMM-DD`
 boost::gregorian::date stringToDate(const std::string& dateStr) {
     std::stringstream ss(dateStr);
     std::string yearStr, monthStr, dayStr;
@@ -34,7 +35,7 @@ boost::gregorian::date stringToDate(const std::string& dateStr) {
     int month = stringToMonth(monthStr);
     int day = std::stoi(dayStr);
 
-    return boost::gregorian::date(year, month, day);
+    return grDate(year, month, day);
 }
 
 UserInterface::UserInterface(Garage& garage, Parking& parking) : garage(garage), parking(parking) {}
@@ -138,9 +139,9 @@ void UserInterface::addVehicle() {
 }
 
 void UserInterface::listVehicles() const {
-    std::cout << "Vehicles in garage:\n";
+    std::cout << "----- Vehicles in garage (V) -----\n";
     garage.listItems();
-    std::cout << "Vehicles in parking:\n";
+    std::cout << "----- Vehicles in parking (X) -----\n";
     parking.listItems();
 }
 
@@ -150,9 +151,12 @@ void UserInterface::performInspections() {
 }
 
 void UserInterface::saveState(const std::string& filename) const {
-    std::ofstream file(filename);
+    fs::create_directory("Pojazdy_data");
+    std::string filePath = "Pojazdy_data/" + filename;
+
+    std::ofstream file(filePath);
     if (file.is_open()) {
-        const auto& vehicles = garage.getItems();
+        const auto& vehicles = parking.getItems();
         for (const auto& vehicle : vehicles) {
             if (dynamic_cast<Car*>(vehicle.get())) {
                 file << "Car ";
@@ -179,15 +183,16 @@ void UserInterface::saveState(const std::string& filename) const {
             file << "\n";
         }
         file.close();
-        std::cout << "State saved to " << filename << ".\n";
-        std::cout << "File saved at: " << filename << std::endl;
+        std::cout << "State saved to " << filePath << ".\n";
+        std::cout << "File saved at: " << filePath << std::endl;
     } else {
         std::cerr << "Unable to open file for saving.\n";
     }
 }
 
 void UserInterface::loadState(const std::string& filename) {
-    std::ifstream file(filename);
+    std::string filePath = "Pojazdy_data/" + filename;
+    std::ifstream file(filePath);
     if (file.is_open()) {
         garage.clear();
         std::string reg_num, type;
@@ -238,8 +243,9 @@ void UserInterface::loadState(const std::string& filename) {
             }
         }
         file.close();
-        std::cout << "State loaded from " << filename << ".\n";
+        std::cout << "State loaded from " << filePath << ".\n";
     } else {
-        throw FileLoadException("Unable to open file: " + filename);
+        throw FileLoadException("Unable to open file: " + filePath);
     }
 }
+

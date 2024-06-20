@@ -1,14 +1,18 @@
 #ifndef INSPECTIONEXCEPTION_H
 #define INSPECTIONEXCEPTION_H
 
-#include <stdexcept>
+#include <exception>
 #include <string>
 
-// Wyjątek rzucany podczas inspekcji
-class InspectionException : public std::runtime_error {
+class InspectionException : public std::exception {
 public:
-    explicit InspectionException(const std::string& message)
-        : std::runtime_error("Inspection Error: " + message) {}
+    explicit InspectionException(const std::string& message) : msg(message) {}
+    const char* what() const noexcept override {
+        return msg.c_str();
+    }
+private:
+    std::string msg;
 };
 
 #endif // INSPECTIONEXCEPTION_H
+

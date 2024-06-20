@@ -1,21 +1,14 @@
 #ifndef USERINTERFACE_H
 #define USERINTERFACE_H
 
-#include "Containers/Container.h"
-#include "Vehicle.h"
+#include <string>
 #include "Containers/Garage.h"
 #include "Containers/Parking.h"
+#include "Inspection/LoaderException.h"
 
 class UserInterface {
-private:
-    Garage& garage;
-    Parking& parking;
-
 public:
     UserInterface(Garage& garage, Parking& parking);
-
-    // scizka zapisu
-    const std::string BASE_PATH = "src/";
 
     void showMenu();
     void addVehicle();
@@ -23,6 +16,11 @@ public:
     void performInspections();
     void saveState(const std::string& filename) const;
     void loadState(const std::string& filename);
+    void removeVehicle(const std::string& reg_num);
+
+private:
+    Garage& garage;
+    Parking& parking;
 };
 
 #endif // USERINTERFACE_H

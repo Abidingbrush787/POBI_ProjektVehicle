@@ -3,8 +3,8 @@
 #include "UserInterface.h"
 
 int main() {
-    Garage garage(100);
-    Parking parking(100);
+    Garage garage(10);
+    Parking parking(10);
 
     UserInterface ui(garage, parking);
     ui.showMenu();
