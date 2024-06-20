@@ -37,5 +37,5 @@ BOOST_AUTO_TEST_CASE(PerformInspections) {
     manager.performInspections();
 
     BOOST_CHECK_EQUAL(garage.getItems().size(), 3); // Wadliwy samochód powinien zostać usunięty z garażu
-    BOOST_CHECK_EQUAL(parking.getItems().size(), 1); // Wadliwy samochód powinien być na parkingu
+    BOOST_CHECK_EQUAL(parking.getItems().size(), 0); // Nie ma zadnego smaochodu w parkingu (pojazdy przeszly)
 }
