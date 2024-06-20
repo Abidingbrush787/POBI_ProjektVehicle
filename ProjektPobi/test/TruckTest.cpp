@@ -1,7 +1,8 @@
 #define BOOST_TEST_MODULE TruckTest
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 #include "Truck.h"
 #include "Inspection/TruckInspectionStrategy.h"
+#include "Inspection/InspectionException.h"
 #include <boost/date_time/gregorian/gregorian.hpp>
 
 BOOST_AUTO_TEST_CASE(TruckCreationTest) {
@@ -26,9 +27,21 @@ BOOST_AUTO_TEST_CASE(TruckInspectionTest) {
 
     BOOST_CHECK_NO_THROW(truck->performInspection());
 
-    Truck* old_truck = new Truck("XYZ987", 1990, 20, 85, 90, 80, expiry_date, strategy);
-    BOOST_CHECK_THROW(old_truck->performInspection(), InspectionException);
+    Truck* bad_brake_truck = new Truck("BADBRAKE", 2020, 20, 45, 90, 80, expiry_date, strategy);
+    BOOST_CHECK_THROW(bad_brake_truck->performInspection(), InspectionException);
+
+    Truck* bad_tire_truck = new Truck("BADTIRE", 2020, 20, 85, 45, 80, expiry_date, strategy);
+    BOOST_CHECK_THROW(bad_tire_truck->performInspection(), InspectionException);
+
+    Truck* bad_cargo_truck = new Truck("BADCARGO", 2020, 20, 85, 90, 45, expiry_date, strategy);
+    BOOST_CHECK_THROW(bad_cargo_truck->performInspection(), InspectionException);
+
+    Truck* expired_truck = new Truck("EXPIRED", 2020, 20, 85, 90, 80, boost::gregorian::date(2020, 12, 31), strategy);
+    BOOST_CHECK_THROW(expired_truck->performInspection(), InspectionException);
 
     delete truck; // Pamiętaj o zwolnieniu pamięci
-    delete old_truck; // Pamiętaj o zwolnieniu pamięci
+    delete bad_brake_truck; // Pamiętaj o zwolnieniu pamięci
+    delete bad_tire_truck; // Pamiętaj o zwolnieniu pamięci
+    delete bad_cargo_truck; // Pamiętaj o zwolnieniu pamięci
+    delete expired_truck; // Pamiętaj o zwolnieniu pamięci
 }

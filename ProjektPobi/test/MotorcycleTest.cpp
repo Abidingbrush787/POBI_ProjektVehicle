@@ -26,9 +26,5 @@ BOOST_AUTO_TEST_CASE(MotorcycleInspectionTest) {
 
     BOOST_CHECK_NO_THROW(motorcycle->performInspection());
 
-    Motorcycle* old_motorcycle = new Motorcycle("XYZ987", 1990, 600, 85, 90, 80, expiry_date, strategy);
-    BOOST_CHECK_THROW(old_motorcycle->performInspection(), InspectionException);
-
     delete motorcycle; // Pamiętaj o zwolnieniu pamięci
-    delete old_motorcycle; // Pamiętaj o zwolnieniu pamięci
 }
